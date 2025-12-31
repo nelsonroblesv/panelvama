@@ -140,6 +140,8 @@
                                     <th style="width: 100px;">Foto</th>
                                     <th>Nombre</th>
                                     <th>Puesto</th>
+                                    <th>Teléfono</th>
+                                    <th>Correo</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -155,6 +157,8 @@
                                         </td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->role }}</td>
+                                        <td>{{ $user->phone }}</td>
+                                        <td>{{ $user->email }}</td>
                                         <td style="width: 250px;">
                                             <button wire:click="edit({{ $user->id }})"
                                                 class="btn btn-sm btn-info m-2">
