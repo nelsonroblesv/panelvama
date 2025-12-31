@@ -136,7 +136,6 @@
                                     <tr>
                                         <th style="width: 100px;">Logo</th>
                                         <th>Nombre</th>
-                                        <th>Descripción</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -150,16 +149,15 @@
                                                 </div>
                                             </td>
                                             <td>{{ $marca->name }}</td>
-                                            <td>{{ $marca->description }}</td>
-                                            <td>
+                                            <td style="width: 250px;">
                                                 <button wire:click="edit({{ $marca->id }})"
                                                     class="btn btn-sm btn-info">
-                                                    <i class="fas fa-edit"></i>
+                                                    <i class="fas fa-edit"></i> Editar
                                                 </button>
                                                 <button
                                                     onclick="confirmDelete({{ $marca->id }}, '{{ $marca->name }}')"
                                                     class="btn btn-sm btn-danger">
-                                                    <i class="fas fa-trash"></i>
+                                                    <i class="fas fa-trash"></i> Borrar
                                                 </button>
                                             </td>
                                         </tr>
