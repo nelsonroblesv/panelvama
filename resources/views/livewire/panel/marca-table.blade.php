@@ -92,45 +92,80 @@
                             </div>
                         </div>
                     </div>
+                    @php
+                        $heads = ['Logo', 'Nombre', 'Descripción', 'Acciones'];
+
+                        $btnEdit = '<button class="btn btn-xs text-primary mx-1" title="Editar">
+                <i class="fa fa-lg fa-fw fa-pen"></i>
+            </button>';
+                        $btnDelete = '<button class="btn btn-xs text-danger mx-1 rounded" title="Borrar">
+                  <i class="fa fa-lg fa-fw fa-trash"></i>
+              </button>';
+
+                        $config = [
+                            'data' => [
+                                [
+                                    'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?semt=ais_hybrid&w=740&q=80',
+                                    'Nelson Jose Robles Vazquez',
+                                    'Developer',
+                                    '+02 (123) 123456789',
+                                    '<nobr>' . $btnEdit . $btnDelete . '</nobr>',
+                                ],
+                                [
+                                    'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?semt=ais_hybrid&w=740&q=80',
+                                    'Sophia Clemens',
+                                    'Ventas',
+                                    '+99 (987) 987654321',
+                                    '<nobr>' . $btnEdit . $btnDelete . '</nobr>',
+                                ],
+                                [
+                                    'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?semt=ais_hybrid&w=740&q=80',
+                                    'Peter Sousa',
+                                    'Gerente',
+                                    '+69 (555) 12367345243',
+                                    '<nobr>' . $btnEdit . $btnDelete . '</nobr>',
+                                ],
+                            ],
+                        ];
+                    @endphp
 
                     <div class="card-body">
                         @if ($marcas->count() > 0)
-                            <div class="table-responsive shadow rounded">
-                                <table class="table table-hover table-bordered">
-                                    <thead class="thead-light text-center">
+                            <table class="table table-hover table-bordered">
+                                <thead class="thead-light text-center">
+                                    <tr>
+                                        <th style="width: 100px;">Logo</th>
+                                        <th>Nombre</th>
+                                        <th>Descripción</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                    @foreach ($marcas as $marca)
                                         <tr>
-                                            <th>Logo</th>
-                                            <th>Nombre</th>
-                                            <th>Descripción</th>
-                                            <th width="150px">Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="text-center">
-                                        @foreach ($marcas as $marca)
-                                            <tr>
-                                                <td>
+                                            <td>
+                                                <div class="w-100 h-100">
                                                     <img src="{{ asset('storage/' . $marca->logo) }}" alt="Logo"
-                                                        class="rounded-circle img-thumbnail"
-                                                        style="width: 60px;height: 60px;">
-                                                </td>
-                                                <td>{{ $marca->name }}</td>
-                                                <td>{{ $marca->description }}</td>
-                                                <td>
-                                                    <button wire:click="edit({{ $marca->id }})"
-                                                        class="btn btn-sm btn-info">
-                                                        <i class="fas fa-edit"></i>
-                                                    </button>
-                                                    <button
-                                                        onclick="confirmDelete({{ $marca->id }}, '{{ $marca->name }}')"
-                                                        class="btn btn-sm btn-danger">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                                        class="img-fluid w-100 h-100 object-fit-cover rounded-">
+                                                </div>
+                                            </td>
+                                            <td>{{ $marca->name }}</td>
+                                            <td>{{ $marca->description }}</td>
+                                            <td>
+                                                <button wire:click="edit({{ $marca->id }})"
+                                                    class="btn btn-sm btn-info">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button
+                                                    onclick="confirmDelete({{ $marca->id }}, '{{ $marca->name }}')"
+                                                    class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
 
                             <div class="mt-3 d-flex justify-content-end">
                                 {{ $marcas->links() }}

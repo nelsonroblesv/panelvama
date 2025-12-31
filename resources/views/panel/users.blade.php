@@ -56,7 +56,6 @@
         @endphp
 
         <div class="card-body p-3">
-            {{-- Minimal example / fill data using the component slot --}}
             <x-adminlte-datatable id="table4" :heads="$heads" :config="$config" head-theme="dark" bordered hoverable
                 with-buttons>
                 @foreach ($config['data'] as $row)
