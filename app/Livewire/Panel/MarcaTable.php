@@ -37,7 +37,6 @@ class MarcaTable extends Component
     {
         $this->resetInputFields();
         $this->resetValidation();
-        $this->selected_id = null;
         $this->dispatch('open-edit-modal');
     }
 
@@ -45,6 +44,9 @@ class MarcaTable extends Component
     {
         $this->name = '';
         $this->description = '';
+        $this->selected_id = null;
+        $this->logo = null;
+        $this->old_logo = null;
     }
 
     public function store()
