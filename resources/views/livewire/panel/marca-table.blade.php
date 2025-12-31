@@ -70,127 +70,93 @@
             <!-- End Modal Edicion y Creacion-->
         </div>
 
-        <div class="card-body p-3">
-            {{-- Table section --}}
-            <div>
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-md-8 mb-2">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-search"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control"
-                                        placeholder="Buscar por nombre o descripción..." wire:model.live="search">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-8 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-search"></i></span>
                                 </div>
-                            </div>
-                            <div class="col-md-4 text-right">
-                                <button wire:click="create" class="btn btn-primary">
-                                    <i class="fas fa-star"></i> Nueva Marca
-                                </button>
+                                <input type="text" class="form-control"
+                                    placeholder="Buscar por nombre o descripción..." wire:model.live="search">
                             </div>
                         </div>
-                    </div>
-                    @php
-                        $heads = ['Logo', 'Nombre', 'Descripción', 'Acciones'];
-
-                        $btnEdit = '<button class="btn btn-xs text-primary mx-1" title="Editar">
-                <i class="fa fa-lg fa-fw fa-pen"></i>
-            </button>';
-                        $btnDelete = '<button class="btn btn-xs text-danger mx-1 rounded" title="Borrar">
-                  <i class="fa fa-lg fa-fw fa-trash"></i>
-              </button>';
-
-                        $config = [
-                            'data' => [
-                                [
-                                    'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?semt=ais_hybrid&w=740&q=80',
-                                    'Nelson Jose Robles Vazquez',
-                                    'Developer',
-                                    '+02 (123) 123456789',
-                                    '<nobr>' . $btnEdit . $btnDelete . '</nobr>',
-                                ],
-                                [
-                                    'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?semt=ais_hybrid&w=740&q=80',
-                                    'Sophia Clemens',
-                                    'Ventas',
-                                    '+99 (987) 987654321',
-                                    '<nobr>' . $btnEdit . $btnDelete . '</nobr>',
-                                ],
-                                [
-                                    'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?semt=ais_hybrid&w=740&q=80',
-                                    'Peter Sousa',
-                                    'Gerente',
-                                    '+69 (555) 12367345243',
-                                    '<nobr>' . $btnEdit . $btnDelete . '</nobr>',
-                                ],
-                            ],
-                        ];
-                    @endphp
-
-                    <div class="card-body">
-                        @if ($marcas->count() > 0)
-                            <table class="table table-hover table-bordered">
-                                <thead class="thead-light text-center">
-                                    <tr>
-                                        <th style="width: 100px;">Logo</th>
-                                        <th>Nombre</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="text-center">
-                                    @foreach ($marcas as $marca)
-                                        <tr>
-                                            <td>
-                                                <div class="w-100 h-100">
-                                                    <img src="{{ asset('storage/' . $marca->logo) }}" alt="Logo"
-                                                        class="img-fluid w-100 h-100 object-fit-cover rounded-">
-                                                </div>
-                                            </td>
-                                            <td>{{ $marca->name }}</td>
-                                            <td style="width: 250px;">
-                                                <button wire:click="edit({{ $marca->id }})"
-                                                    class="btn btn-sm btn-info">
-                                                    <i class="fas fa-edit"></i> Editar
-                                                </button>
-                                                <button
-                                                    onclick="confirmDelete({{ $marca->id }}, '{{ $marca->name }}')"
-                                                    class="btn btn-sm btn-danger">
-                                                    <i class="fas fa-trash"></i> Borrar
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-
-                            <div class="mt-3 d-flex justify-content-end">
-                                {{ $marcas->links() }}
-                            </div>
-                        @else
-                            <div class="text-center py-5">
-                                <i class="fas fa-box-open fa-3x text-gray mb-3"></i>
-                                <p class="text-muted h5">
-                                    @if ($search != '')
-                                        No se encontraron marcas que coincidan con "{{ $search }}"
-                                    @else
-                                        No hay marcas registradas en el sistema.
-                                    @endif
-                                </p>
-                                @if ($search != '')
-                                    <button class="btn btn-link" wire:click="$set('search', '')">Limpiar
-                                        búsqueda</button>
-                                @endif
-                            </div>
-                        @endif
+                        <div class="col-md-4 text-right">
+                            <button wire:click="create" class="btn btn-primary">
+                                <i class="fas fa-star"></i> Nueva Marca
+                            </button>
+                        </div>
                     </div>
                 </div>
+                <div class="card-body table-responsive p-3">
+                    @if ($marcas->count() > 0)
 
+                        <table class="table table-hover text-nowrap">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th style="width: 100px;">Logo</th>
+                                    <th>Nombre</th>
+                                    <th>Descripción</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($marcas as $marca)
+                                    <tr>
+                                        <td>{{ $marca->id }}</td>
+                                        <td>
+                                            <div class="w-100 h-100">
+                                                <img src="{{ asset('storage/' . $marca->logo) }}" alt="Logo"
+                                                    class="img-fluid w-100 h-100 object-fit-cover rounded-">
+                                            </div>
+                                        </td>
+                                        <td>{{ $marca->name }}</td>
+                                        <td>{{ $marca->description }}</td>
+                                        <td style="width: 250px;">
+                                            <button wire:click="edit({{ $marca->id }})"
+                                                class="btn btn-sm btn-info m-2">
+                                                <i class="fas fa-edit"></i> Editar
+                                            </button>
+                                            <button
+                                                onclick="confirmDelete({{ $marca->id }}, '{{ $marca->name }}')"
+                                                class="btn btn-sm btn-danger m-2">
+                                                <i class="fas fa-trash"></i> Borrar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <div class="mt-3 d-flex justify-content-end">
+                            {{ $marcas->links() }}
+                        </div>
+                    @else
+                        <div class="text-center py-5">
+                            <i class="fas fa-box-open fa-3x text-gray mb-3"></i>
+                            <p class="text-muted h5">
+                                @if ($search != '')
+                                    No se encontraron marcas que coincidan con "{{ $search }}"
+                                @else
+                                    No hay marcas registradas en el sistema.
+                                @endif
+                            </p>
+                            @if ($search != '')
+                                <button class="btn btn-link" wire:click="$set('search', '')">Limpiar
+                                    búsqueda</button>
+                            @endif
+                        </div>
+                    @endif
+
+                </div>
+                <!-- /.card-body -->
             </div>
-            {{-- End Table section --}}
-
+            <!-- /.card -->
         </div>
+
+
     </div>
     <script>
         window.addEventListener('close-edit-modal', event => {
