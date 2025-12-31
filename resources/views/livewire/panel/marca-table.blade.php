@@ -110,7 +110,7 @@
                                         <td>
                                             <div class="w-100 h-100">
                                                 <img src="{{ asset('storage/' . $marca->logo) }}" alt="Logo"
-                                                    class="img-fluid w-100 h-100 object-fit-cover rounded-">
+                                                    class="img-fluid w-100 h-100 object-fit-cover rounded-pill">
                                             </div>
                                         </td>
                                         <td>{{ $marca->name }}</td>
